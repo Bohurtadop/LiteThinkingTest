@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors');
 const userRouter = require("./routes/user");
 const companyRouter = require("./routes/company");
 const productRouter = require("./routes/product");
@@ -31,6 +32,7 @@ app.get('/', (req, res) => {
 })
 
 app.use(express.json());
+app.use(cors());
 
 // Load server routes
 app.use("/user", userRouter);
