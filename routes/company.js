@@ -1,17 +1,17 @@
 const express = require("express");
-const userController = require("../controllers/user");
+const companyController = require("../controllers/company");
 
 var router = express.Router();
 
 // Basic CRUD
 router.get("/", async function (req, res) {
-    await userController.getUsers(function (result) {
+    await companyController.getCompanies(function (result) {
         res.send(result);
     });
 });
 
 router.post("/", async function (req, res) {
-    await userController.createUser(req.body, function (result) {
+    await companyController.createCompany(req.body, function (result) {
         res.send(result);
     });
 });
@@ -27,7 +27,7 @@ router.delete("/", function (req, res) {
 // Additional routes
 router.get("/:id", async function (req, res) {
     const { id } = req.params;
-    await userController.getUser(id, function (result) {
+    await companyController.getCompany(id, function (result) {
         res.send(result);
     });
 });

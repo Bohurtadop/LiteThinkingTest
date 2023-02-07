@@ -1,9 +1,13 @@
 const express = require("express");
-const userRouter = require("./routes/user.js");
-const database = require("./controllers/database.js");
+const userRouter = require("./routes/user");
+const companyRouter = require("./routes/company");
+const loginRouter = require("./routes/login");
+const database = require("./controllers/database");
 
-// Get .env data
+// Get .env data and declare additional constants
 require('dotenv').config();
+const port = process.env.SERVER_PORT || 3000;
+const app = express();
 
 // Connect to database
 database.connect(function (err) {
@@ -16,15 +20,17 @@ database.connect(function (err) {
 });
 
 // Initialize server in port
-const app = express();
-const port = process.env.SERVER_PORT || 3000;
+app.listen(port, () => {
+    console.log('Server listening on port: ', port);
+});
 
 app.get('/', (req, res) => {
     res.send('Server on');
 })
 
-app.listen(port, () => {
-    console.log('Server listening on port: ', port);
-});
+app.use(express.json());
 
+// Load server routes
 app.use("/user", userRouter);
+app.use("/company", companyRouter);
+app.use("/login", loginRouter);
