@@ -1,6 +1,8 @@
 const express = require("express");
 const userRouter = require("./routes/user");
 const companyRouter = require("./routes/company");
+const productRouter = require("./routes/product");
+const inventoryRouter = require("./routes/inventory");
 const loginRouter = require("./routes/login");
 const database = require("./controllers/database");
 
@@ -33,4 +35,6 @@ app.use(express.json());
 // Load server routes
 app.use("/user", userRouter);
 app.use("/company", companyRouter);
+app.use("/product", productRouter);
+app.use("/inventory", inventoryRouter);
 app.use("/login", loginRouter);

@@ -1,17 +1,17 @@
 const express = require("express");
-const productController = require("../controllers/product");
+const inventoryController = require("../controllers/inventory");
 
 var router = express.Router();
 
 // Basic CRUD
 router.get("/", async function (req, res) {
-    await productController.getProducts(function (result) {
+    await inventoryController.getInventories(function (result) {
         res.send(result);
     });
 });
 
 router.post("/", async function (req, res) {
-    await productController.createProduct(req.body, function (result) {
+    await inventoryController.createInventory(req.body, function (result) {
         res.send(result);
     });
 });
@@ -25,9 +25,9 @@ router.delete("/", function (req, res) {
 });
 
 // Additional routes
-router.get("/:id", async function (req, res) {
-    const { id } = req.params;
-    await productController.getProduct(id, function (result) {
+router.get("/:companyId", async function (req, res) {
+    const { companyId } = req.params;
+    await inventoryController.getInventory(companyId, function (result) {
         res.send(result);
     });
 });
