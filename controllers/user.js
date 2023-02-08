@@ -1,7 +1,7 @@
 const database = require("./database");
 
 async function getUser(id, callback) {
-    const sql = "select * from users where user_id = :id";
+    const sql = "select * from users where username = :id";
     database.query(sql, { id: id }, function (error, results) {
         if (error) throw error;
         return callback(results);
